@@ -224,3 +224,16 @@ GOOGLE_API_KEY=your_gemini_api_key_here
   > GitHub chỉ ghi nhận đóng góp khi commit được push trực tiếp vào **nhánh mặc định (`main`)**.  
   > Trước khi nộp bài, mở trình duyệt vào repo nhóm, chọn tab **Insights > Contributors**. Bắt buộc mọi thành viên trong nhóm đều phải xuất hiện trên biểu đồ commit thì mới được tính điểm chuyên cần nhóm!
 - [ ] **Nộp bài lên VLearn LMS:** Mỗi thành viên copy đường link repository GitHub của nhóm và nộp lên cổng LMS trước khi đồng hồ đếm ngược kết thúc 240 phút!
+
+---
+
+## 7. Chạy lại bản offline đã triển khai
+
+Snapshot Crossref 24 bản ghi trong `data/raw/` cho phép chạy pipeline không cần Crossref API. Lần chạy đầu cần tải mô hình `sentence-transformers/all-MiniLM-L6-v2`; sau đó có thể chạy offline bằng:
+
+```bash
+HF_HUB_OFFLINE=1 LLM_PROVIDER=mock .venv/bin/python script/run_phase1.py
+HF_HUB_OFFLINE=1 LLM_PROVIDER=mock .venv/bin/python script/run_corruption_flow.py
+```
+
+Hai lệnh tạo dữ liệu sạch, 10 câu hỏi, ba collection Chroma, báo cáo GX/freshness và bảng so sánh tại `data/reports/`. Chế độ `mock` dùng heuristic cho điểm judge; `fallback_judge_count` trong metrics cho biết số câu không được LLM chấm. `retrieval_hit_rate` bao gồm cơ chế tra cứu tiêu đề chính xác của QA, nên không phải chỉ số vector search thuần. Corrupted collection chỉ phục vụ thí nghiệm, còn quality gate báo FAIL để chặn dùng dữ liệu lỗi. Có thể đặt `REFRESH_SOURCE=1` để thử gọi Crossref API, và chọn LLM provider trong `.env` nếu muốn chạy judge thật.

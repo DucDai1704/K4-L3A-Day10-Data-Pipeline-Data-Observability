@@ -1,0 +1,64 @@
+{
+  "timestamp": "2026-09-25T15:00:20.800246",
+  "total_original_rows": 24,
+  "total_corrupted_rows": 22,
+  "corruptions": [
+    {
+      "type": "drop_latest_records",
+      "description": "Dropped 4 newest records (20%)",
+      "count": 4,
+      "paper_ids": [
+        "10.1145/3637528.3671812",
+        "10.1145/3637528.3671808",
+        "10.1145/3637528.3671804",
+        "10.1145/3637528.3671807"
+      ]
+    },
+    {
+      "type": "blank_summary",
+      "description": "Erased abstract/summary to empty string",
+      "count": 2,
+      "paper_ids": [
+        "10.1145/3637528.3671802",
+        "10.1145/3637528.3671824"
+      ]
+    },
+    {
+      "type": "inject_noise",
+      "description": "Injected gibberish noise tokens into summary",
+      "count": 2,
+      "paper_ids": [
+        "10.1145/3637528.3671823",
+        "10.1145/3637528.3671822"
+      ]
+    },
+    {
+      "type": "truncate_title",
+      "description": "Truncated title to < 8 characters",
+      "count": 2,
+      "paper_ids": [
+        "10.1145/3637528.3671821",
+        "10.1145/3637528.3671810"
+      ]
+    },
+    {
+      "type": "stale_date",
+      "description": "Shifted published date back 365 days (stale data)",
+      "count": 3,
+      "paper_ids": [
+        "10.1145/3637528.3671820",
+        "10.1145/3637528.3671819",
+        "10.1145/3637528.3671818"
+      ]
+    },
+    {
+      "type": "duplicate_rows",
+      "description": "Duplicated rows to create ghost records and violate uniqueness",
+      "count": 2,
+      "paper_ids": [
+        "10.1145/3637528.3671802",
+        "10.1145/3637528.3671824"
+      ]
+    }
+  ]
+}

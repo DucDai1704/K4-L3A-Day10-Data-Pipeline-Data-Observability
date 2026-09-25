@@ -55,10 +55,10 @@ def test_clean_dataframe(clean_df):
 def test_quality_gate_clean_data(clean_df, settings):
     result = run_data_quality_checks(clean_df, settings, "test_clean")
     assert result["success"] is True
-    assert result["checks"]["ExpectTableRowCountToBeBetween"] is True
-    assert result["checks"]["ExpectColumnValuesToNotBeNull"] is True
-    assert result["checks"]["ExpectColumnValuesToBeUnique"] is True
-    assert result["checks"]["ExpectColumnValueLengthsToBeBetween"] is True
+    assert result["checks"]["ExpectTableRowCountToBeBetween"] == True
+    assert result["checks"]["ExpectColumnValuesToNotBeNull"] == True
+    assert result["checks"]["ExpectColumnValuesToBeUnique"] == True
+    assert result["checks"]["ExpectColumnValueLengthsToBeBetween"] == True
 
 
 def test_freshness_sla(clean_df, settings):

@@ -1,0 +1,17 @@
+{
+  "timestamp": "2026-09-25T15:12:14.031660",
+  "source_label": "pytest_run",
+  "action_taken": "AUTO_REPAIRED_FROM_RAW",
+  "initial_passed": false,
+  "repaired_passed": true,
+  "freshness": {
+    "latest_published": "2026-06-12",
+    "oldest_published": "2025-06-06",
+    "stale_rows": 4,
+    "total_rows": 22,
+    "stale_ratio": 0.1818,
+    "freshness_threshold_days": 180,
+    "is_fresh": true
+  },
+  "final_rows": 24
+}

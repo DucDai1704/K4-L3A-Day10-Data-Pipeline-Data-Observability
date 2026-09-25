@@ -66,14 +66,14 @@ def run_data_quality_checks(df: pd.DataFrame, settings: Settings, report_name: s
     6. Ghi kết quả vào data/quality/.
     """
     # Direct rule evaluations
-    r1_count = 5 <= len(df) <= 5000
-    r2_not_null = (
+    r1_count = bool(5 <= len(df) <= 5000)
+    r2_not_null = bool(
         ("paper_id" in df.columns and df["paper_id"].notna().all() and (df["paper_id"].astype(str).str.strip() != "").all())
         and ("title" in df.columns and df["title"].notna().all() and (df["title"].astype(str).str.strip() != "").all())
         and ("text_for_embedding" in df.columns and df["text_for_embedding"].notna().all() and (df["text_for_embedding"].astype(str).str.strip() != "").all())
     )
-    r3_unique = "paper_id" in df.columns and bool(df["paper_id"].is_unique)
-    r4_summary_len = "summary" in df.columns and bool((df["summary"].astype(str).str.len() >= 30).all())
+    r3_unique = bool("paper_id" in df.columns and df["paper_id"].is_unique)
+    r4_summary_len = bool("summary" in df.columns and (df["summary"].astype(str).str.len() >= 30).all())
 
     rules_passed = bool(r1_count and r2_not_null and r3_unique and r4_summary_len)
     gx_success = True

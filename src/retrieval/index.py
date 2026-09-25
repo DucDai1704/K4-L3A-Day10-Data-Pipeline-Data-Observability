@@ -86,7 +86,7 @@ class LocalEmbeddingIndex:
         df: pd.DataFrame,
         settings: Settings,
         embeddings_output_path: Path | None = None,
-    ) -> "LocalEmbeddingIndex":
+    ) -> LocalEmbeddingIndex:
         collection_name = cls._derive_collection_name(settings, embeddings_output_path)
         documents = cls._build_documents(df)
         persist_path = settings.paths.chroma_dir
@@ -129,7 +129,7 @@ class LocalEmbeddingIndex:
         )
 
     @classmethod
-    def load(cls, settings: Settings, embeddings_path: Path | None = None) -> "LocalEmbeddingIndex":
+    def load(cls, settings: Settings, embeddings_path: Path | None = None) -> LocalEmbeddingIndex:
         payload = read_json(embeddings_path or settings.paths.embeddings_json)
         return cls(
             settings=settings,

@@ -13,10 +13,10 @@
 
 | STT | Họ và tên | MSSV | Vai trò chính | Module/deliverable sở hữu |
 | --: | --- | --- | --- | --- |
-| 1 | Thành viên 1 | MSSV1 | Trưởng nhóm / Pipeline Integrator | `core/config.py`, `script/run_phase1.py`, `src/pipelines/phase1.py` |
-| 2 | Thành viên 2 | MSSV2 | Data Foundation & Recovery | `src/ingestion/crossref.py`, `src/ingestion/cleaning.py`, `data/clean/` |
-| 3 | Thành viên 3 | MSSV3 | RAG & Vector Index | `src/retrieval/index.py`, `src/retrieval/embeddings.py`, ChromaDB |
-| 4 | Thành viên 4 | MSSV4 | Observability & Evaluation | `src/observability/quality.py` (GX 1.x), `src/evaluation/testset.py`, reporting |
+| 1 | Đỗ Đức Đại | [MSSV] | Trưởng nhóm / Pipeline Integrator | `core/config.py`, `script/run_phase1.py`, `src/pipelines/phase1.py`, Dashboard, Self-healing |
+| 2 | Đặng Quốc Hiệp | [MSSV] | Data Foundation & Recovery | `src/ingestion/crossref.py`, `src/ingestion/cleaning.py`, `data/clean/` |
+| 3 | Nguyễn Việt Dũng | [MSSV] | RAG & Vector Index | `src/retrieval/index.py`, `src/retrieval/embeddings.py`, ChromaDB |
+| 4 | Nguyễn Thế Khang | [MSSV] | Observability & Evaluation | `src/observability/quality.py` (GX 1.x), `src/evaluation/testset.py`, reporting, tests |
 
 ---
 
@@ -49,13 +49,13 @@ Crossref API (hoặc Snapshot Offline data/raw/)
 
 | Khối             | Input          | Xử lý chính             | Output/artifact          | Owner          |
 | ----------------- | -------------- | -------------------------- | ------------------------ | -------------- |
-| Ingestion         | Crossref REST / Offline JSON | Fetch, retry/backoff, parse JATS, bảo toàn raw | `data/raw/crossref_records.json` | Thành viên 2 |
-| Cleaning          | Raw records    | Chuẩn hóa chuỗi, regex JATS, tính `age_days`, deduplicate | `data/clean/papers_clean.csv` | Thành viên 2 |
-| Embedding/index   | Clean DataFrame| MiniLM-L6-v2, tạo text chunk, persist ChromaDB | `data/chroma/`, collection `papers-baseline` | Thành viên 3 |
-| Evaluation        | Clean data + Index | Sinh 10 câu hỏi test 4 khía cạnh, đo Hit rate & F1 | `data/eval/test_set.json`, `baseline_metrics.json` | Thành viên 4 |
-| Observability     | Clean/Corrupted DF | GX 1.x Expectation Suite & Freshness SLA (&le;180 days) | `data/quality/*_quality_report.json` | Thành viên 4 |
-| Corruption/repair | Clean DF / Raw records | Tiêm 6 loại lỗi, đo suy giảm, hồi phục idempotent | `corruption_log.json`, `repaired_metrics.json` | Thành viên 1 & 2 |
-| Orchestration     | Toàn bộ modules | Điều phối `run_phase1.py` và `run_corruption_flow.py` | `phase1_report.md`, `corruption_report.md` | Thành viên 1 |
+| Ingestion         | Crossref REST / Offline JSON | Fetch, retry/backoff, parse JATS, bảo toàn raw | `data/raw/crossref_records.json` | Đặng Quốc Hiệp |
+| Cleaning          | Raw records    | Chuẩn hóa chuỗi, regex JATS, tính `age_days`, deduplicate | `data/clean/papers_clean.csv` | Đặng Quốc Hiệp |
+| Embedding/index   | Clean DataFrame| MiniLM-L6-v2, tạo text chunk, persist ChromaDB | `data/chroma/`, collection `papers-baseline` | Nguyễn Việt Dũng |
+| Evaluation        | Clean data + Index | Sinh 10 câu hỏi test 4 khía cạnh, đo Hit rate & F1 | `data/eval/test_set.json`, `baseline_metrics.json` | Nguyễn Thế Khang |
+| Observability     | Clean/Corrupted DF | GX 1.x Expectation Suite & Freshness SLA (&le;180 days) | `data/quality/*_quality_report.json` | Nguyễn Thế Khang |
+| Corruption/repair | Clean DF / Raw records | Tiêm 6 loại lỗi, đo suy giảm, hồi phục idempotent | `corruption_log.json`, `repaired_metrics.json` | Đỗ Đức Đại & Đặng Quốc Hiệp |
+| Orchestration     | Toàn bộ modules | Điều phối `run_phase1.py` và `run_corruption_flow.py` | `phase1_report.md`, `corruption_report.md` | Đỗ Đức Đại |
 
 ---
 
